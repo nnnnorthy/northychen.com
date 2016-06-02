@@ -1,0 +1,46 @@
+body{
+	background: #ebebeb;
+	font-size: 14pt;
+
+}
+
+a:link{text-decoration:none;color:#000;}
+a:visited{text-decoration: none;color:#000;}
+a:hover{text-decoration:underline;} 
+
+.container{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Monaco, "Lucida Console", monospace;
+	color: #000;
+}
+
+.header{
+	padding:20px;
+}
+.clear{
+	clear: both;
+}
+
+h1,ul{
+	list-style-type: none;
+	padding: 0;
+	font-size: 1em;
+}
+.info{
+	float: left;
+	
+}
+.order{
+	float: right;
+}
+
+.projects{
+
+}
+.thum{
+	width: 200px;
+	height: 140px;
+	float: left;
+}
