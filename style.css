@@ -1,6 +1,6 @@
 body{
 	background: #ebebeb;
-	font-size: 14pt;
+	font-size: 12pt;
 
 }
 
@@ -27,6 +27,7 @@ h1,ul{
 	list-style-type: none;
 	padding: 0;
 	font-size: 1em;
+	text-decoration: bold;
 }
 .info{
 	float: left;
@@ -43,4 +44,16 @@ h1,ul{
 	width: 200px;
 	height: 140px;
 	float: left;
+}
+
+.slideshow{
+
+}
+figcaption{
+	font-size: 0.8em;
+}
+.description{
+	padding-top: 0px;
+	width: 800px;
+
 }
