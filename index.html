@@ -2,6 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8">
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".preference").click(
+		function(){
+			$(".date").hide();
+		}
+	);
+});
+</script>
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
 	<title>nnnnorthy</title>
@@ -11,17 +21,16 @@
 	<div class="nav">
 	<div class="info">
 		<ul>
-		<li>northy chen</li>
-		<li>if gmail then SEND</li>
-		<li>if wechat then SCAN</li>
+			<li>northy chen</li>
+			<li>if gmail then SEND</li>
+			<li>if wechat then SCAN</li>
 		</ul>
-
 	</div>
 	<div class="order">
 		<ul>
 		<li>work</li>
-		<li>by PREFERENCE</li>
-		<li>by DATE</li>
+		<li class="preference">by PREFERENCE</li>
+		<li class="date">by DATE</li>
 		</ul>
 	</div>
 	</div>
@@ -29,7 +38,10 @@
 	<div class="matrix">
 		<div class="thum"><img src="hockney-tunnel.gif"></div>
 		<div class="thum"><img src="train-hangout.gif"></div>
-		<div class="thum"><img src="typeself.gif"></div>
+		<div class="thum"><a href="typeself.html">
+			<img src="typeself.png"
+			onmouseover="this.src='typeself_.gif'"
+            onmouseout="this.src='typeself.png'"></a></div>
 		<div class="thum"><img src="tiffany.gif"></div>
 		<div class="thum"><a href="hitme.html">
 			<img src="hit-me.gif"
@@ -39,22 +51,37 @@
 			<img src="hamster-maze.gif"
 			onmouseover="this.src='hamster-maze_.gif'"
 			onmouseout="this.src='hamster-maze.gif'"></a></div>
-		<div class="thum"><img src="michelin.gif"></div>
+		<div class="thum"><a href="michelin.html">
+			<img src="michelin.png"
+			onmouseover="this.src='michelin_.gif'"
+            onmouseout="this.src='michelin.png'"></div>
 		<div class="thum"><a href="littlebits.html">
 			<img src="littlebits.gif"
 			onmouseover="this.src='littlebits_.gif'"
             onmouseout="this.src='littlebits.gif'"></a></div>
-		<div class="thum"><img src="narrator.gif"
+		<div class="thum"><a href="narrator.html">
+			<img src="narrator.gif"
 			onmouseover="this.src='narrator_.gif'"
-			onmouseout="this.src='narrator.gif'"></div>
-		<div class="thum"><img src="sofa-recorder.gif"
+			onmouseout="this.src='narrator.gif'"></a></div>
+		<div class="thum"><a href="sofarecorder.html">
+			<img src="sofa-recorder.gif"
 			onmouseover="this.src='sofa-recorder_.gif'"
-			onmouseout="this.src='sofa-recorder.gif'"></div>
-		<div class="thum"><img src="objectality.gif"></div>
-		<div class="thum"><img src="lightscape.gif"></div>
+			onmouseout="this.src='sofa-recorder.gif'"></a>
+			</div>
+		<div class="thum"><a href="objectality.html">
+			<img src="objectality.png"
+			onmouseover="this.src='objectality_.gif'"
+			onmouseout="this.src='objectality.png'"></a></div>
+		<div class="thum"><a href="lightscape.html">
+			<img src="lightscape.png"
+			onmouseover="this.src='lightscape_.gif'"
+			onmouseout="this.src='lightscape.png'"></div>
 		<div class="thum"><img src="catsanddogs.gif"></div>
 		<div class="thum"><img src="incense-holder.gif"></div>
-		<div class="thum"><img src="codesign.gif"></div>
+		<div class="thum"><a href="codesign.html">
+			<img src="codesign.png"
+			onmouseover="this.src='codesign.gif'"
+            onmouseout="this.src='codesign.png'"></a></div>
 		<div class="thum"><img src="plantashes.gif"></div>
 		<div class="thum"><img src="dayoff.gif"></div>
 		</div>

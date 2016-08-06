@@ -2,6 +2,26 @@
 <html>
 <head>
 <meta charset="utf-8">
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	console.log($(".prev"));
+	$(".prev").click(
+		function(){
+			$(".date").hide();
+		}
+	);
+
+	$(".next").click(
+		function(){
+			console.log("next clicked");
+			var slides = $(".slides");
+			console.log(slides.scrollLeft());
+			slides.scrollLeft(900);
+		}
+	);
+});
+</script>
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
 	<title>nnnnorthy</title>
@@ -33,8 +53,8 @@
 				<img src="imgs/hamster_02.jpg">
 				<img src="imgs/hamster_01.gif">
 			</div>
-			<a class="prev">&lt; PRE</a>
-			<a class="next">NXT &gt;</a>
+			<a href="#" class="prev">&lt; PRE</a>
+			<a href="#" class="next">NXT &gt;</a>
 		</div>	
 	</div>
 
@@ -50,23 +70,27 @@
 
 	<div class="process">
 	
-		<div class="diagram">
-			<img src="imgs/hamster_05.jpg">
+		<div class="diagram1">
+			<img src="imgs/hamster-circuit_01.jpg">
 		</div>
+		<div class="diagram2">
+			<img src="imgs/hamster-circuit_02.jpg">
+		</div>
+        
 
-        <div class="processvid">
-			<iframe src="https://player.vimeo.com/video/165529184?color=ebebeb&title=0&byline=0&portrait=0" width="320" height="180" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-		</div>
 
 		<div class="projectinfo">
 		<p>A hamster running machine designed with two "OR" logicBits. Once it's triggered by the light sensor, it runs forever.</p>
+		</div>
+
+		<div class="video">
+			<iframe src="https://player.vimeo.com/video/165529184?color=ebebeb&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		</div>
 
 
 		<div class="video">
 			<iframe src="https://player.vimeo.com/video/92857867?color=ebebeb&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		</div>
-
 	</div> 
 
 
