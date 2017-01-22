@@ -254,16 +254,9 @@ footer{
 }
 
 #wechatQR {
-  position:absolute;
+  position:fixed;
   display: none;
   width: 160px;
   height 160px;
 }
 
-#wechatQR span {
-  display:block;
-  position:absolute;
-  right:9px;
-  top: 5px;
-  cursor:pointer;
-}
