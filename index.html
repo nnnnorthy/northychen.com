@@ -3,15 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$(".preference").click(
-		function(){
-			$(".date").hide();
-		}
-	);
-});
-</script>
+<script type="text/javascript" src="js/slides.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
 	<title>northy is her real name.</title>
@@ -19,101 +11,114 @@ $(function(){
 <body>
 	
 	<div class="nav">
-	<div class="info">
-		<ul>
-			<li>northy chen</li>
-			<li>if GMAIL then SEND</li>
-			<li>if WECHAT then SCAN</li>
-		</ul>
-	</div>
-	<div class="order">
-		<ul>
-		<li>work</li>
-		<li class="preference">by THUMBNAILS</li>
-		<li class="date">by WORDS</li>
-		</ul>
-	</div>
+	  <div class="info">
+	    <ul>
+	      <li>northy chen</li>
+        <li id="gmaillink"><a href="javascript:void(0);">if GMAIL then SEND</a></li>
+        <li id="wechatlink"><a href="javascript:void(0);">if WECHAT then SCAN</a></li>
+	    </ul>
+	  </div>
+	  <div class="order">
+	    <ul>
+	    <li>work</li>
+	    <li class="preference"><a href="index.html">by THUMBNAILS</a></li>
+	    <li class="date"><a href="about.html">by WORDS</a></li>
+	    </ul>
+	  </div>
+	  
 	</div>
 
 	<div class="matrix">
 		
 		<div class="thum"><a href="shm.html">
 			<img src="shm_.png"
-		 	onmouseover="this.src='shm.gif'"
-            onmouseout="this.src='shm_.png'"></a></div>
+		 	  onmouseover="this.src='shm.gif'"
+        onmouseout="this.src='shm_.png'"></a>
+    </div>
 		<div class="thum"><a href="fedex.html">
 			<img src="fedex.png"
-			onmouseover="this.src='fedex.gif'"
-            onmouseout="this.src='fedex.png'"></a></div>
+			  onmouseover="this.src='fedex.gif'"
+        onmouseout="this.src='fedex.png'"></a>
+    </div>
 		<div class="thum"><a href="typeself.html">
 			<img src="typeself.png"
-			onmouseover="this.src='typeself_.gif'"
-            onmouseout="this.src='typeself.png'"></a></div>
-        <div class="thum"><a href="tiffanykeys.html">
-        	<img src="tiffany-keys.png"
-			onmouseover="this.src='tiffany-keys_.gif'"
-            onmouseout="this.src='tiffany-keys.png'"></a></div>
-        <div class="thum"><a href="hitme.html">
+			  onmouseover="this.src='typeself_.gif'"
+        onmouseout="this.src='typeself.png'"></a>
+    </div>
+    <div class="thum"><a href="tiffanykeys.html">
+     	<img src="tiffany-keys.png"
+			  onmouseover="this.src='tiffany-keys_.gif'"
+        onmouseout="this.src='tiffany-keys.png'"></a>
+    </div>
+    <div class="thum"><a href="hitme.html">
 			<img src="hit-me.gif"
-			onmouseover="this.src='hit-me_.gif'"
-            onmouseout="this.src='hit-me.gif'"></a></div>
+			  onmouseover="this.src='hit-me_.gif'"
+        onmouseout="this.src='hit-me.gif'"></a>
+    </div>
 		<div class="thum"><a href="tiffany.html">
 			<img src="tiffany.png"
-			onmouseover="this.src='tiffany_.gif'"
-            onmouseout="this.src='tiffany.png'"></a></div>
+			  onmouseover="this.src='tiffany_.gif'"
+        onmouseout="this.src='tiffany.png'"></a>
+    </div>
 		<div class="thum"><a href="hamster.html">
 			<img src="hamster-maze.gif"
-			onmouseover="this.src='hamster-maze_.gif'"
-			onmouseout="this.src='hamster-maze.gif'"></a></div>
-			<div class="thum"><a href="littlebits.html">
+			  onmouseover="this.src='hamster-maze_.gif'"
+			  onmouseout="this.src='hamster-maze.gif'"></a>
+    </div>
+		<div class="thum"><a href="littlebits.html">
 			<img src="littlebits.gif"
-			onmouseover="this.src='littlebits_.gif'"
-            onmouseout="this.src='littlebits.gif'"></a></div>
+			  onmouseover="this.src='littlebits_.gif'"
+        onmouseout="this.src='littlebits.gif'"></a>
+    </div>
 		<div class="thum"><a href="michelin.html">
 			<img src="michelin.png"
-			onmouseover="this.src='michelin_.gif'"
-            onmouseout="this.src='michelin.png'"></div>
-		
+			  onmouseover="this.src='michelin_.gif'"
+        onmouseout="this.src='michelin.png'"></a>
+    </div>
 		<div class="thum"><a href="narrator.html">
 			<img src="narrator.gif"
-			onmouseover="this.src='narrator_.gif'"
-			onmouseout="this.src='narrator.gif'"></a></div>
+			  onmouseover="this.src='narrator_.gif'"
+			  onmouseout="this.src='narrator.gif'"></a>
+    </div>
 		<div class="thum"><a href="sofarecorder.html">
 			<img src="sofa-recorder.gif"
-			onmouseover="this.src='sofa-recorder_.gif'"
-			onmouseout="this.src='sofa-recorder.gif'"></a>
+			  onmouseover="this.src='sofa-recorder_.gif'"
+			  onmouseout="this.src='sofa-recorder.gif'"></a>
 			</div>
 		<div class="thum"><a href="objectality.html">
 			<img src="objectality.png"
-			onmouseover="this.src='objectality_.gif'"
-			onmouseout="this.src='objectality.png'"></a></div>
+			  onmouseover="this.src='objectality_.gif'"
+			  onmouseout="this.src='objectality.png'"></a>
+    </div>
 		<div class="thum"><a href="catsanddogs.html">
-		    <img src="catsanddogs.gif"
-			onmouseover="this.src='catsanddogs_.gif'"
-            onmouseout="this.src='catsanddogs.gif'"></a></div>
+		  <img src="catsanddogs.gif"
+		    onmouseover="this.src='catsanddogs_.gif'"
+        onmouseout="this.src='catsanddogs.gif'"></a>
+    </div>
 		<div class="thum"><a href="codesign.html">
 			<img src="codesign.png"
-			onmouseover="this.src='codesign.gif'"
-            onmouseout="this.src='codesign.png'"></a></div>
+		    onmouseover="this.src='codesign.gif'"
+        onmouseout="this.src='codesign.png'"></a>
+    </div>
 		<div class="thum"><a href="incenseholder.html">
 			<img src="incenseholder.png"
-			onmouseover="this.src='incenseholder_.gif'"
-            onmouseout="this.src='incenseholder.png'"></a></div>
-
+			  onmouseover="this.src='incenseholder_.gif'"
+        onmouseout="this.src='incenseholder.png'"></a>
+    </div>
 		<div class="thum"><a href="plantashes.html">
-		<img src="plantashes.png"
-			onmouseover="this.src='plant-ashes.gif'"
-            onmouseout="this.src='plantashes.png'"></a></div>
-
-        <div class="thum"><a href="lightscape.html">
+		  <img src="plantashes.png"
+			  onmouseover="this.src='plant-ashes.gif'"
+        onmouseout="this.src='plantashes.png'"></a>
+    </div>
+    <div class="thum"><a href="lightscape.html">
 			<img src="lightscape.png"
-			onmouseover="this.src='lightscape_.gif'"
-			onmouseout="this.src='lightscape.png'"></div>
+		    onmouseover="this.src='lightscape_.gif'"
+			  onmouseout="this.src='lightscape.png'"></a>
+    </div>
 		<div class="thum"><a href="dayoff.html">
 			<img src="dayoff.png"
-			onmouseover="this.src='dayoff_.png'"
-            onmouseout="this.src='dayoff.png'"></a></div>
-		</div>
-	</div>
-
+			  onmouseover="this.src='dayoff_.png'"
+        onmouseout="this.src='dayoff.png'"></a>
+    </div>
+  </div>
 </body>

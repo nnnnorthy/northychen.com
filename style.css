@@ -14,6 +14,9 @@ a:link{text-decoration:none;color:#000;}
 a:visited{text-decoration: none;color:#000;}
 a:hover{text-decoration:underline;} 
 
+h2 {
+  font-weight: normal;
+}
 .nav{
 	min-height: 10px;
 	position: fixed;
@@ -23,6 +26,16 @@ a:hover{text-decoration:underline;}
 	margin-left: auto;
 	margin-right: auto;
 	z-index: 100;
+}
+
+#gmaillink, #wechatlink {
+  cursor: pointer;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; 
 }
 
 .info{
@@ -40,11 +53,11 @@ a:hover{text-decoration:underline;}
 .order{
 	position: absolute;
 	text-align: right;
-	-ms-transform: rotate(270deg); /* IE 9 */
-    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
-    transform: rotate(270deg);
-    right: 0px;
-    top: 80px;
+	-ms-transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+  right: 0px;
+  top: 80px;
 	width: 200px;
 	height: 100px;
 }
@@ -54,6 +67,14 @@ a:hover{text-decoration:underline;}
 	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.matrix img {
+    -webkit-user-drag: none;
+     -khtml-user-drag: none;
+       -moz-user-drag: none;
+        -ms-user-drag: none;
+            user-drag: none; 
 }
 
 .thum{
@@ -117,7 +138,7 @@ a:hover{text-decoration:underline;}
 	margin-left: auto;
 	margin-right: auto;
 	width: 640px;
-	margin-top: 40px;
+	margin-top: 30px;
 	font-size: 1em;
 }
 
@@ -130,6 +151,23 @@ a:hover{text-decoration:underline;}
 	line-height: 140%;
 	border: 20px;
 }
+
+.projectinfo a {
+  text-decoration:underline;
+}
+
+.backtohome {
+  margin-top: 30px;
+}
+
+.backtohome a:link {
+  text-decoration:none;
+}
+
+.backtohome a:hover {
+  text-decoration:underline;
+}
+
 .process{
 	width: 640px;
 	margin-left: auto;
@@ -176,4 +214,58 @@ footer{
 	margin-right: auto;
 	font-size: 0.8em;
 	margin-bottom: 40px;
+}
+
+#snakeBox {
+  width: 640px;
+  height: 640px;
+  display: none;
+  position: absolute;
+  top: 378px;
+  left: 50%;
+}
+
+#snakeBox .wall {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: -50%;
+  left: -50%;
+  border: 5px solid black;
+  background-color: #ebebeb;
+}
+
+#snakeBox .snakeInstructions {
+  display: none;
+  position: absolute;
+  top: 123px;
+  left: 123px;
+  padding-top: 160px;
+  width: 384px;
+  height: 224px;
+  border: 5px solid black;
+  background-color: #ebebeb;
+  text-align: center;
+}
+
+#snakeBox .closeInstructions {
+  position:absolute;
+  cursor: pointer;
+  right: 5px;
+  top: 0;
+}
+
+#wechatQR {
+  position:absolute;
+  display: none;
+  width: 160px;
+  height 160px;
+}
+
+#wechatQR span {
+  display:block;
+  position:absolute;
+  right:9px;
+  top: 5px;
+  cursor:pointer;
 }
