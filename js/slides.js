@@ -33,7 +33,7 @@ $(function(){
 
 // Floating qr code
 $(function() {
-  var qr = $('<div id="wechatQR"><img src="wechatQR.gif" width="160" height="160"></img><span>x</span></div>');
+  var qr = $('<div id="wechatQR"><img src="wechatQR.gif" width="160" height="160"></img></div>');
   var close = qr.find('span');
   var x = 100, y = 100;
   var dx = 1.0, dy = 3 / 5;
@@ -70,17 +70,10 @@ $(function() {
 
 // Snake game
 $(function() {
-  var box = $('<div class="wall"></div>');
-  var snakeBox = $('<div id="snakeBox"></div>');
-  var instructions = $('<div class="snakeInstructions"><span></span></div>');
-  var closeInstruction = $('<div class="closeInstructions">x</div>');
-  var link = $('#gmaillink');
-
-  instructions.append(closeInstruction);
-  box.append(instructions);
-  snakeBox.append(box);
-  $('body').append(snakeBox);
-  $('body').keydown(keydown);;
+  var snakeBox = $('#snakeBox');
+  var box = snakeBox.find('.wall');
+  var instructions = box.find('.snakeInstructions');
+  var closeInstruction = box.find('.closeInstructions');
 
   // Internal states
   const STATES = {
@@ -96,6 +89,8 @@ $(function() {
   var state = STATES.STOPPED;
   var handler = null;
 
+  load();
+
   function update() {
 
   }
@@ -109,7 +104,8 @@ $(function() {
   }
 
   function load() {
-    setInstructions("I'TS A KEYBOARD GAME.<br/>PRESS enter TO START CONNECTING.");
+    console.log("LOADING", snakeBox, instructions);
+    setInstructions("IT'S A KEYBOARD GAME.<br/>PRESS enter TO START CONNECTING.");
     snakeBox.show();
     instructions.show();
     snake = [];
@@ -129,17 +125,6 @@ $(function() {
   function setInstructions(text) {
     instructions.find('span').html(text);
   }
-
-  // Link and window behaviors
-  $(document).on('click', function (e) {
-    if ($(e.target).closest(link).length === 0 && $(e.target).closest(box).length === 0) {
-      close();
-    }
-  });
-
-  link.click(function() {
-    load();
-  });
 
   closeInstruction.click(function(){
     start();
