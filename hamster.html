@@ -3,25 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	console.log($(".prev"));
-	$(".prev").click(
-		function(){
-			$(".date").hide();
-		}
-	);
-
-	$(".next").click(
-		function(){
-			console.log("next clicked");
-			var slides = $(".slides");
-			console.log(slides.scrollLeft());
-			slides.scrollLeft(900);
-		}
-	);
-});
-</script>
+<script type="text/javascript" src="js/slides.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
 	<title>nnnnorthy</title>
@@ -32,16 +14,16 @@ $(function(){
 		<div class="info">
 			<ul>
 			<li><a href="index.html">northy chen</a></li>
-			<li>if gmail then SEND</li>
-			<li>if wechat then SCAN</li>
+			<li>if GMAIL then SEND</li>
+			<li>if WECHAT then SCAN</li>
 			</ul>
 
 		</div>
 		<div class="order">
 			<ul>
 			<li>work</li>
-			<li>by PREFERENCE</li>
-			<li>by DATE</li>
+			<li>by THUMBNAILS</li>
+			<li>by WORDS</li>
 			</ul>
 		</div>
 	</div>
@@ -53,9 +35,11 @@ $(function(){
 				<img src="imgs/hamster_02.jpg">
 				<img src="imgs/hamster_01.gif">
 			</div>
-			<a href="#" class="prev">&lt; PRE</a>
-			<a href="#" class="next">NXT &gt;</a>
-		</div>	
+		</div>
+		<div class="slide-buttons">
+			<a href="javascript:void(0);" class="prev">&lt; PRE</a>
+			<a href="javascript:void(0);" class="next">NXT &gt;</a>
+		</div>
 	</div>
 
 	<h2 class="projecttitle">
@@ -82,15 +66,15 @@ $(function(){
 		<div class="projectinfo">
 		<p>A hamster running machine designed with two "OR" logicBits. Once it's triggered by the light sensor, it runs forever.</p>
 		</div>
-
-		<div class="video">
-			<iframe src="https://player.vimeo.com/video/165529184?color=ebebeb&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-		</div>
-
-
 		<div class="video">
 			<iframe src="https://player.vimeo.com/video/92857867?color=ebebeb&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		</div>
+		<div class="video">
+			<iframe src="https://player.vimeo.com/video/165529184?color=ebebeb&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		</div>
+		
+		
+
 	</div> 
 
 

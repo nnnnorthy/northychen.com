@@ -22,6 +22,7 @@ a:hover{text-decoration:underline;}
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
+	z-index: 100;
 }
 
 .info{
@@ -74,15 +75,26 @@ a:hover{text-decoration:underline;}
 	width: 900px;
 	height: 550px;
 	overflow: hidden;
-	z-index: -100;
+	z-index: 0;
 }
 
 .slideshow .window .slides {
 	height: 550px;
-	width: 3000px;
 }
 
-.slideshow .window .prev {
+.slideshow .window .slides img {
+	display: block;
+	float: left;
+}
+
+.slide-buttons {
+	position: absolute;
+	top: 0;
+	width: 900px;
+	height: 580px;
+}
+
+.slideshow .prev {
 	display: block;
 	position: absolute;
 	width: 100px;
@@ -91,7 +103,7 @@ a:hover{text-decoration:underline;}
 	padding-top: 500px;
 }
 
-.slideshow .window .next {
+.slideshow .next {
 	display: block;
 	position: absolute;
 	width: 100px;
