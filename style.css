@@ -229,7 +229,7 @@ footer{
 #snakeBox .snakeInstructions {
   display: none;
   position: relative;
-  top: 200px;
+  top: 236px;
   left: 155px;
   padding-top: 60px;
   width: 320px;
@@ -251,10 +251,18 @@ footer{
   top: 0;
 }
 
+#snakeBox .food {
+  position: absolute;
+  /*border: 1px solid green;*/
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+
 #snakeBox .snakeBody {
   position: absolute;
-  /*background-color: #00cc00;*/
-  border: 1px solid brown;
+  /*border: 1px solid brown;*/
   border-radius: 5px;
   width: 20px;
   height: 20px;

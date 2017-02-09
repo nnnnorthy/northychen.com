@@ -72,7 +72,8 @@ $(function() {
 $(function() {
 
   const BLOCK_SIZE = 20;
-  const SPEED = 5 / 1000; // 2.5 block per second
+  const START_SPEED = 5 / 1000; // 2.5 block per second
+  var speed;
   var snakeBox = $('#snakeBox');
 
   if(snakeBox.length == 0) {
@@ -80,6 +81,7 @@ $(function() {
   }
 
   var instructions = snakeBox.find('.snakeInstructions');
+  var foodBox = snakeBox.find('.food');
 
   // Internal states
   const STATES = {
@@ -101,6 +103,8 @@ $(function() {
 
   var state = STATES.STOPPED;
   var handler = null;
+  var data = [];
+  var food = {x: -1, y: -1};
 
   init();
 
@@ -108,7 +112,7 @@ $(function() {
     //console.log("UPDATE", snake.cmd);
     var dx = 0, dy = 0;
     if(snake.lastUpdate == 0) snake.lastUpdate = t;
-    var moveDist = (t - snake.lastUpdate) * SPEED;
+    var moveDist = (t - snake.lastUpdate) * speed;
     var dist = moveDist;
     snake.lastUpdate = t;
 
@@ -195,14 +199,25 @@ $(function() {
       if(hx < 0 || hx > gridWidth() || hy < 0 || hy > gridHeight()) {
         // Lost too;
         console.log("lost to wall", hx, hy, gridWidth(), gridHeight());
+        lost();
       }
-      for(let i = 1; i < snake.body.length; i++) {
+
+      for(let i = 2; i < snake.body.length; i++) {
         let block = snake.body[i];
         //console.log(hx, hy, block.x, block.y);
         if(hx == block.x && hy == block.y) {
           // LOST!!!
           console.log("lost here");
+          lost();
         }
+      }
+
+      // Food check
+      console.log(hx, hy, food.x, food.y);
+      if(hx == food.x && hy == food.y) {
+        console.log('ATE FOOD');
+        snakeGrow(food.c);
+        addFood();
       }
     }
 
@@ -221,7 +236,10 @@ $(function() {
   }
 
   function nextChunk() {
-    return "northychen@gmail.com";
+    if(data.length < 1) {
+      data = "northychen@gmail.com".split('');
+    }
+    return data.shift();
   }
 
   function keydown(keyPressed) {
@@ -235,7 +253,7 @@ $(function() {
         start();
       }
     }else if(state == STATES.RUNNING) {
-      if(key == 'Escape') {
+      if(key == 'Escape' || key == 'p' || key == ' ') {
         pause();
       }else if(key.startsWith('Arrow')) {
         if(key.endsWith('Up'))    snake.cmd.push(DIR.UP);
@@ -245,14 +263,19 @@ $(function() {
       }
 
     }else if(state == STATES.PAUSED) {
-      if(key == 'Enter') {
+      if(key == 'Enter' || key == ' ') {
         resume();
       }
-
     }else if(state == STATES.LOST) {
-
+      if(key == 'Enter' || key == ' ') {
+        initSnake();
+        start();
+      }
     }else if(state == STATES.WON) {
-
+      if(key == 'Enter' || key == ' ') {
+        initSnake();
+        start();
+      }
     }
   }
 
@@ -262,19 +285,39 @@ $(function() {
     snake = [];
     state = STATES.LOADED;
     $(window).keydown(keydown);
+    initSnake();
   }
 
-  function start() {
-    instructions.hide();
-    state = STATES.RUNNING;
-    handler = window.requestAnimationFrame(update);
+  function initSnake() {
+    snakeBox.find('.snakeBody').remove();
+    data = [];
     snake = {
       dir: DIR.RIGHT,
       lastUpdate: 0,
       cmd: [],
       body: []
     }
-    snakeGrow();
+    snakeGrow(nextChunk());
+    addFood();
+  }
+
+  function addFood() {
+    let c = nextChunk();
+    food.x = Math.floor(Math.random() * gridWidth());
+    food.y = Math.floor(Math.random() * gridHeight());
+    food.c = c;
+    foodBox.css({
+      top: food.y * BLOCK_SIZE,
+      left: food.x * BLOCK_SIZE
+    });
+    foodBox.text(c);
+  }
+
+  function start() {
+    speed = START_SPEED;
+    instructions.hide();
+    state = STATES.RUNNING;
+    handler = window.requestAnimationFrame(update);
   }
 
   function gridWidth() {
@@ -287,7 +330,20 @@ $(function() {
 
   function pause() {
     state = STATES.PAUSED;
-    setInstructions("PAUSED -- PRESS enter TO RESUME.");
+    setInstructions("PAUSED.<br/>PRESS space TO RESUME.");
+    instructions.show();
+  }
+
+  function lost() {
+    state = STATES.LOST;
+    setInstructions(":)<br/>NOW DROP northy A HELLO.");
+    instructions.show();
+  }
+
+  function won() {
+    state = STATES.LOST;
+    setInstructions(":)<br/>NOW DROP northy A HELLO.");
+    //setInstructions(":)<br/>DROP ME A HELLO.");
     instructions.show();
   }
 
@@ -298,17 +354,16 @@ $(function() {
     handler = window.requestAnimationFrame(update);
   }
 
-  function snakeGrow() {
-    var x = Math.floor(gridWidth() / 2);
-    var y = Math.floor(gridHeight() / 2);
+  function snakeGrow(chunk) {
+    var x = Math.floor(gridWidth() * Math.random() * 0.6);
+    var y = Math.floor(gridHeight() * Math.random() * 0.3);
 
     if(snake.body.length > 0) {
       var lastBlock = snake.body[snake.body.length - 1];
-      x = lastBLock.x;
+      x = lastBlock.x;
       y = lastBlock.y;
     }
 
-    var chunk = nextChunk();
     for(let c of chunk) {
       var dom = $('<div class="snakeBody"></div>');
       dom.text(c);
@@ -319,9 +374,14 @@ $(function() {
         py: y,
         dom: dom
       }
+      dom.css({
+        top: block.py * BLOCK_SIZE,
+        left: block.px * BLOCK_SIZE
+      })
       snakeBox.append(dom);
       snake.body.push(block);
     }
+    //speed *= 1.02; // Somehow faster causes a bug
   }
 
   function setInstructions(text) {
