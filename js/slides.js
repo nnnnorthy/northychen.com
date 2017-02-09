@@ -70,63 +70,262 @@ $(function() {
 
 // Snake game
 $(function() {
+
+  const BLOCK_SIZE = 20;
+  const SPEED = 5 / 1000; // 2.5 block per second
   var snakeBox = $('#snakeBox');
-  var box = snakeBox.find('.wall');
-  var instructions = box.find('.snakeInstructions');
-  var closeInstruction = box.find('.closeInstructions');
+
+  if(snakeBox.length == 0) {
+    return;
+  }
+
+  var instructions = snakeBox.find('.snakeInstructions');
 
   // Internal states
   const STATES = {
-    STOPPPED  : 0,
-    LOADED    : 1,
+    LOADED    : 0,
+    PAUSED    : 1,
     RUNNING   : 2,
-    PAUSED    : 3,
-    LOST      : 4,
-    WON       : 5
+    LOST      : 3,
+    WON       : 4
   };
 
-  var snake = [];
+  const DIR = {
+    UP    : -1,
+    DOWN  : 1,
+    LEFT  : -2,
+    RIGHT : 2
+  };
+
+  var snake;
+
   var state = STATES.STOPPED;
   var handler = null;
 
-  load();
+  init();
 
-  function update() {
+  function update(t) {
+    //console.log("UPDATE", snake.cmd);
+    var dx = 0, dy = 0;
+    if(snake.lastUpdate == 0) snake.lastUpdate = t;
+    var moveDist = (t - snake.lastUpdate) * SPEED;
+    var dist = moveDist;
+    snake.lastUpdate = t;
 
+    // Move the head
+    while(dist > 0) {
+      if(snake.dir == DIR.UP) {
+        dy = -dist;
+      }else if(snake.dir == DIR.DOWN) {
+        dy = dist;
+      }else if(snake.dir == DIR.LEFT) {
+        dx = -dist;
+      }else if(snake.dir == DIR.RIGHT) {
+        dx = dist;
+      }
+
+      var head = snake.body[0];
+      head.px += dx; head.py += dy;
+      if(Math.abs(head.px - head.x) > 1 || Math.abs(head.py - head.y) > 1) {
+        // Move the body blocks forward by one block
+        let i = snake.body.length - 1;
+        while(i > 0) {
+          var prevBlock = snake.body[i - 1];
+          var currBlock = snake.body[i];
+          currBlock.x = prevBlock.x;
+          currBlock.y = prevBlock.y;
+          currBlock.px = prevBlock.x;
+          currBlock.px = prevBlock.x;
+          i--;
+        }
+
+        // Then move the head by one block
+        dist = 0;
+        if(head.px - head.x > 1) {
+          head.x += 1;
+          dist = head.px - head.x - 1;
+          head.px = head.x;
+        }
+        if(head.py - head.y > 1){
+          head.y += 1;
+          dist = head.py - head.y - 1;
+          head.py = head.y;
+        }
+        if(head.px - head.x < -1) {
+          head.x -= 1;
+          dist = head.x - head.px - 1;
+          head.px = head.x;
+        }
+        if(head.py - head.y < -1){
+          head.y -= 1;
+          dist = head.y - head.py - 1;
+          head.py = head.y;
+        }
+
+        // Update the snake direction
+        while(snake.cmd.length > 0) {
+          var cmd = snake.cmd.shift();
+          console.log(snake.cmd, cmd, 'SHIFT');
+          // Command and current direction is in opposite direction is ignored
+          if(cmd + snake.dir != 0) {
+            snake.dir = cmd;
+            break;
+          }
+        }
+      }else {
+        // Move the body blocks by the same amount as the head did
+        let i = snake.body.length - 1;
+        while(i > 0) {
+          let prevBlock = snake.body[i - 1];
+          let currBlock = snake.body[i];
+          if(prevBlock.x > currBlock.x) currBlock.px += dist;
+          if(prevBlock.x < currBlock.x) currBlock.px -= dist;
+          if(prevBlock.y > currBlock.y) currBlock.py += dist;
+          if(prevBlock.y < currBlock.y) currBlock.py -= dist;
+          i--;
+        }
+
+        dist = 0;
+      }
+
+      // Collision check
+      let hx = Math.ceil(head.px);
+      let hy = Math.ceil(head.py);
+
+      if(hx < 0 || hx > gridWidth() || hy < 0 || hy > gridHeight()) {
+        // Lost too;
+        console.log("lost to wall", hx, hy, gridWidth(), gridHeight());
+      }
+      for(let i = 1; i < snake.body.length; i++) {
+        let block = snake.body[i];
+        //console.log(hx, hy, block.x, block.y);
+        if(hx == block.x && hy == block.y) {
+          // LOST!!!
+          console.log("lost here");
+        }
+      }
+    }
+
+    // Update body display
+    for(var block of snake.body) {
+      block.dom.css({
+        top: block.py * BLOCK_SIZE,
+        left: block.px * BLOCK_SIZE
+      })
+    }
+
+    // Register for next frame update
+    if(state == STATES.RUNNING) {
+      handler = window.requestAnimationFrame(update);
+    }
   }
 
-  function keydown(key) {
-    console.log(key);
-    console.log(key.which);
-    if(state == STATES.RUNNING) {
+  function nextChunk() {
+    return "northychen@gmail.com";
+  }
+
+  function keydown(keyPressed) {
+    //console.log(keyPressed);
+    console.log(keyPressed.key, state);
+
+    var key = keyPressed.key;
+
+    if(state == STATES.LOADED) {
+      if(key == 'Enter') {
+        start();
+      }
+    }else if(state == STATES.RUNNING) {
+      if(key == 'Escape') {
+        pause();
+      }else if(key.startsWith('Arrow')) {
+        if(key.endsWith('Up'))    snake.cmd.push(DIR.UP);
+        if(key.endsWith('Down'))  snake.cmd.push(DIR.DOWN);
+        if(key.endsWith('Left'))  snake.cmd.push(DIR.LEFT);
+        if(key.endsWith('Right')) snake.cmd.push(DIR.RIGHT);
+      }
+
+    }else if(state == STATES.PAUSED) {
+      if(key == 'Enter') {
+        resume();
+      }
+
+    }else if(state == STATES.LOST) {
+
+    }else if(state == STATES.WON) {
 
     }
   }
 
-  function load() {
-    console.log("LOADING", snakeBox, instructions);
+  function init() {
     setInstructions("IT'S A KEYBOARD GAME.<br/>PRESS enter TO START CONNECTING.");
-    snakeBox.show();
     instructions.show();
     snake = [];
     state = STATES.LOADED;
-  }
-
-  function close() {
-    snakeBox.hide();
-    state = STATES.STOPPED;
+    $(window).keydown(keydown);
   }
 
   function start() {
     instructions.hide();
     state = STATES.RUNNING;
+    handler = window.requestAnimationFrame(update);
+    snake = {
+      dir: DIR.RIGHT,
+      lastUpdate: 0,
+      cmd: [],
+      body: []
+    }
+    snakeGrow();
+  }
+
+  function gridWidth() {
+    return Math.floor(snakeBox.width() / BLOCK_SIZE);
+  }
+
+  function gridHeight() {
+    return Math.floor(snakeBox.height() / BLOCK_SIZE);
+  }
+
+  function pause() {
+    state = STATES.PAUSED;
+    setInstructions("PAUSED -- PRESS enter TO RESUME.");
+    instructions.show();
+  }
+
+  function resume() {
+    instructions.hide();
+    snake.lastUpdate = 0;
+    state = STATES.RUNNING;
+    handler = window.requestAnimationFrame(update);
+  }
+
+  function snakeGrow() {
+    var x = Math.floor(gridWidth() / 2);
+    var y = Math.floor(gridHeight() / 2);
+
+    if(snake.body.length > 0) {
+      var lastBlock = snake.body[snake.body.length - 1];
+      x = lastBLock.x;
+      y = lastBlock.y;
+    }
+
+    var chunk = nextChunk();
+    for(let c of chunk) {
+      var dom = $('<div class="snakeBody"></div>');
+      dom.text(c);
+      var block = {
+        x: x,
+        y: y,
+        px: x,
+        py: y,
+        dom: dom
+      }
+      snakeBox.append(dom);
+      snake.body.push(block);
+    }
   }
 
   function setInstructions(text) {
     instructions.find('span').html(text);
   }
 
-  closeInstruction.click(function(){
-    start();
-  });
 });
