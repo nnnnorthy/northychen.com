@@ -247,9 +247,9 @@ footer{
 #snakeBox .closeInstructions {
   position:absolute;
   cursor: pointer;
-  right: 4px;
+  right: 6px;
   top: 0;
-  font-size: 21px;
+  font-size: 13px;
 }
 
 #snakeBox .food {
