@@ -72,7 +72,7 @@ $(function() {
 $(function() {
 
   const BLOCK_SIZE = 20;
-  const START_SPEED = 5 / 1000; // 2.5 block per second
+  const START_SPEED = 6 / 1000; // 2.5 block per second
   var speed;
   var snakeBox = $('#snakeBox');
 
@@ -80,8 +80,9 @@ $(function() {
     return;
   }
 
-  var instructions = snakeBox.find('.snakeInstructions');
-  var foodBox = snakeBox.find('.food');
+  var instructions     = snakeBox.find('.snakeInstructions');
+  var instructionClose = snakeBox.find('.closeInstructions');
+  var foodBox          = snakeBox.find('.food');
 
   // Internal states
   const STATES = {
@@ -139,7 +140,7 @@ $(function() {
           currBlock.x = prevBlock.x;
           currBlock.y = prevBlock.y;
           currBlock.px = prevBlock.x;
-          currBlock.px = prevBlock.x;
+          currBlock.py = prevBlock.y;
           i--;
         }
 
@@ -182,10 +183,10 @@ $(function() {
         while(i > 0) {
           let prevBlock = snake.body[i - 1];
           let currBlock = snake.body[i];
-          if(prevBlock.x > currBlock.x) currBlock.px += dist;
-          if(prevBlock.x < currBlock.x) currBlock.px -= dist;
-          if(prevBlock.y > currBlock.y) currBlock.py += dist;
-          if(prevBlock.y < currBlock.y) currBlock.py -= dist;
+          if(prevBlock.x > currBlock.x) {currBlock.px += dist; currBlock.py = currBlock.y;}
+          if(prevBlock.x < currBlock.x) {currBlock.px -= dist; currBlock.py = currBlock.y;}
+          if(prevBlock.y > currBlock.y) {currBlock.py += dist; currBlock.px = currBlock.x;}
+          if(prevBlock.y < currBlock.y) {currBlock.py -= dist; currBlock.px = currBlock.x;}
           i--;
         }
 
@@ -196,9 +197,13 @@ $(function() {
       let hx = Math.ceil(head.px);
       let hy = Math.ceil(head.py);
 
-      if(hx < 0 || hx > gridWidth() || hy < 0 || hy > gridHeight()) {
+      if(head.px < 0 || hx > gridWidth() || head.py < 0 || hy > gridHeight()) {
         // Lost too;
-        console.log("lost to wall", hx, hy, gridWidth(), gridHeight());
+        console.log("lost to wall",  head.px, head.py, hx, hy, gridWidth(), gridHeight());
+        if(head.px < 0) head.px = 0;
+        if(head.py < 0) head.py = 0;
+        if(hx > gridWidth()) head.px = gridWidth();
+        if(hy > gridHeight()) head.py = gridHeight();
         lost();
       }
 
@@ -230,16 +235,24 @@ $(function() {
     }
 
     // Register for next frame update
-    if(state == STATES.RUNNING) {
+    if(state == STATES.RUNNING || state == STATES.WON) {
       handler = window.requestAnimationFrame(update);
     }
   }
 
   function nextChunk() {
     if(data.length < 1) {
-      data = "northychen@gmail.com".split('');
+      data = "northychen@gmail.com-".split('');
     }
     return data.shift();
+  }
+
+  function instructionsClosed() {
+    if(state == STATES.LOADED || state == STATES.LOST || state == STATES.WON) {
+      start();
+    }else if(state == STATES.PAUSED) {
+      resume();
+    }
   }
 
   function keydown(keyPressed) {
@@ -268,12 +281,10 @@ $(function() {
       }
     }else if(state == STATES.LOST) {
       if(key == 'Enter' || key == ' ') {
-        initSnake();
         start();
       }
     }else if(state == STATES.WON) {
       if(key == 'Enter' || key == ' ') {
-        initSnake();
         start();
       }
     }
@@ -285,6 +296,7 @@ $(function() {
     snake = [];
     state = STATES.LOADED;
     $(window).keydown(keydown);
+    instructionClose.click(instructionsClosed);
     initSnake();
   }
 
@@ -303,6 +315,9 @@ $(function() {
 
   function addFood() {
     let c = nextChunk();
+    if(c == '-') {
+      won();
+    }
     food.x = Math.floor(Math.random() * gridWidth());
     food.y = Math.floor(Math.random() * gridHeight());
     food.c = c;
@@ -314,6 +329,7 @@ $(function() {
   }
 
   function start() {
+    initSnake();
     speed = START_SPEED;
     instructions.hide();
     state = STATES.RUNNING;
@@ -341,9 +357,8 @@ $(function() {
   }
 
   function won() {
-    state = STATES.LOST;
+    state = STATES.WON;
     setInstructions(":)<br/>NOW DROP northy A HELLO.");
-    //setInstructions(":)<br/>DROP ME A HELLO.");
     instructions.show();
   }
 
@@ -381,7 +396,7 @@ $(function() {
       snakeBox.append(dom);
       snake.body.push(block);
     }
-    //speed *= 1.02; // Somehow faster causes a bug
+    speed = speed + START_SPEED * 0.05;
   }
 
   function setInstructions(text) {

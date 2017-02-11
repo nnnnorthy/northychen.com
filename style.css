@@ -249,6 +249,7 @@ footer{
   cursor: pointer;
   right: 4px;
   top: 0;
+  font-size: 21px;
 }
 
 #snakeBox .food {
@@ -274,5 +275,6 @@ footer{
   display: none;
   width: 160px;
   height 160px;
+  z-index: 500;
 }
 
