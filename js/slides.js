@@ -357,14 +357,8 @@ $(function() {
   }
 
   function won() {
-<<<<<<< Updated upstream
     state = STATES.WON;
     setInstructions(":)<br/>NOW DROP A HELLO.");
-=======
-    state = STATES.LOST;
-    setInstructions(":)<br/>NOW DROP A HELLO.");
-    //setInstructions(":)<br/>NOW DROP ME A HELLO.");
->>>>>>> Stashed changes
     instructions.show();
   }
 
