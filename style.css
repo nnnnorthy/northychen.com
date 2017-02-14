@@ -97,6 +97,7 @@ h2 {
 	height: 550px;
 	overflow: hidden;
 	z-index: 0;
+  transition: 0.5s;
 }
 
 .slideshow .window .slides {
@@ -132,6 +133,15 @@ h2 {
 	right: 80px;
 	padding-top: 500px;
 	text-align: right;
+}
+
+.slideshow .bar {
+	padding-top: 541px;
+	text-align: center;
+}
+
+.slideshow .bar a.slide-link {
+  margin: 0 5px;
 }
 
 .projecttitle{

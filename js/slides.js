@@ -6,15 +6,46 @@ $(function(){
 	var slides = win.find(".slides");
 	var images = slides.find("img");
 
+  let bar = $('<div class="bar"></div>');
+  for(let i = 0; i < images.length; i++) {
+    let c = $('<a href="javascript:void(0);" class="slide-link"></a>');
+    c.click(function(){gotoPic(i);});
+    bar.append(c);
+  }
+  $('.slide-buttons').append(bar);
+
 	// calculate and set the width of the slides div
 	var width = images.length * PIC_WIDTH;
 	slides.css({width: width + "px"});
 
 	var currentPic = 0;
 
+  updatePic();
+
 	function updatePic() {
 		win.scrollLeft(currentPic * PIC_WIDTH);
+    let links = bar.find('.slide-link');
+    for(let i = 0; i < images.length; i++) {
+      let link = $(links[i]);
+      if(i < currentPic) {
+        link.text('<');
+      }else if(i == currentPic) {
+        link.text(pad(currentPic + 1, 2) + '/' + pad(images.length, 2));
+      }else if(i > currentPic) {
+        link.text('>');
+      }
+    }
 	}
+
+  function pad(num, size) {
+      var s = "000000000" + num;
+      return s.substr(s.length-size);
+  }
+
+  function gotoPic(i) {
+    currentPic = i;
+    updatePic();
+  }
 
 	// Bind the click events of the prev and next button
 	$(".prev").click(function(){
