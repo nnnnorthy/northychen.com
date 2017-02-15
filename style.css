@@ -6,8 +6,6 @@ body{
 	color: #000;
 	padding: 0px;
 	border: 0px;
-
-
 }
 
 a:link{text-decoration:none;color:#000;}
@@ -17,6 +15,7 @@ a:hover{text-decoration:underline;}
 h2 {
   font-weight: normal;
 }
+
 .nav{
 	min-height: 10px;
 	position: fixed;
@@ -26,6 +25,11 @@ h2 {
 	margin-left: auto;
 	margin-right: auto;
 	z-index: 100;
+}
+
+.mobile {
+  clear: both;
+  display: none;
 }
 
 #gmaillink, #wechatlink {
@@ -42,8 +46,8 @@ h2 {
 	position: absolute;
 	text-align: right
 	-ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
 	left: 0px;
 	top: 80px;
 	width: 200px;
@@ -288,3 +292,94 @@ footer{
   z-index: 500;
 }
 
+@media (max-width:960px)  {
+  .nav {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .info {
+    position: static;
+    width: 45%;
+    float: left;
+    -ms-transform: none;
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  .order {
+    position: static;
+    width: 45%;
+    float: right;
+    -ms-transform: none;
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  .matrix {
+    width: 100%;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .projectinfo {
+    width: 100%;
+    text-align:justify;
+  }
+
+  .projecttitle {
+    width: 100%;
+  }
+
+  .process {
+    width: 100%;
+  }
+
+  .slideshow {
+    width: 100%;
+    height: auto;
+  }
+
+  .slideshow .window {
+    width: 100%;
+    overflow-y: unset;
+    overflow-x: hidden;
+    height: auto;
+  }
+
+  .slideshow .window .slides {
+    width: 100% !important;
+    height: auto;
+  }
+
+  .slides img {
+    display: block;
+    width: 100%;
+    margin: 5px auto;
+  }
+
+  .slideshow .slide-buttons {
+    display:none;
+  }
+
+  .diagram1{
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  .diagram2{
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  .video iframe {
+    width: 100%;
+  }
+
+  footer {
+    width: 100%;
+  }
+}
