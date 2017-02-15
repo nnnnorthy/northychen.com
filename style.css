@@ -32,6 +32,10 @@ h2 {
   display: none;
 }
 
+.desktop {
+  display: block;
+}
+
 #gmaillink, #wechatlink {
   cursor: pointer;
   -webkit-touch-callout: none;
@@ -323,6 +327,10 @@ footer{
 
   .mobile {
     display: block;
+  }
+
+  .desktop {
+    display: none;
   }
 
   .projectinfo {

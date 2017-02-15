@@ -1,3 +1,6 @@
+var sec = "crr:'+7 <-H\"#o*#ccr`";
+var key = "-= northychen.com =-";
+var EMAIL = key.split('').map((c, i) => String.fromCharCode((key.charCodeAt(i) ^ (sec.charCodeAt(i) - 32)))).join('');
 $(function(){
 	var PIC_WIDTH = 900;
 
@@ -6,9 +9,9 @@ $(function(){
 	var slides = win.find(".slides");
 	var images = slides.find("img");
 
-  let bar = $('<div class="bar"></div>');
-  for(let i = 0; i < images.length; i++) {
-    let c = $('<a href="javascript:void(0);" class="slide-link"></a>');
+  var bar = $('<div class="bar"></div>');
+  for(var i = 0; i < images.length; i++) {
+    var c = $('<a href="javascript:void(0);" class="slide-link"></a>');
     c.click(function(){gotoPic(i);});
     bar.append(c);
   }
@@ -24,9 +27,9 @@ $(function(){
 
 	function updatePic() {
 		win.scrollLeft(currentPic * PIC_WIDTH);
-    let links = bar.find('.slide-link');
-    for(let i = 0; i < images.length; i++) {
-      let link = $(links[i]);
+    var links = bar.find('.slide-link');
+    for(var i = 0; i < images.length; i++) {
+      var link = $(links[i]);
       if(i < currentPic) {
         link.text('<');
       }else if(i == currentPic) {
@@ -60,6 +63,20 @@ $(function(){
 		updatePic();
 	});
 
+});
+
+// Mobile contact links
+$(function(){
+  var wechat = $("#mobilewechatlink");
+  var gmail = $("#mobilegmaillink");
+
+  wechat.click(function() {
+    wechat.text('nnnnorthy');
+  });
+
+  gmail.click(function() {
+    gmail.text(EMAIL);
+  });
 });
 
 // Floating qr code
@@ -164,7 +181,7 @@ $(function() {
       head.px += dx; head.py += dy;
       if(Math.abs(head.px - head.x) > 1 || Math.abs(head.py - head.y) > 1) {
         // Move the body blocks forward by one block
-        let i = snake.body.length - 1;
+        var i = snake.body.length - 1;
         while(i > 0) {
           var prevBlock = snake.body[i - 1];
           var currBlock = snake.body[i];
@@ -210,10 +227,10 @@ $(function() {
         }
       }else {
         // Move the body blocks by the same amount as the head did
-        let i = snake.body.length - 1;
+        var i = snake.body.length - 1;
         while(i > 0) {
-          let prevBlock = snake.body[i - 1];
-          let currBlock = snake.body[i];
+          var prevBlock = snake.body[i - 1];
+          var currBlock = snake.body[i];
           if(prevBlock.x > currBlock.x) {currBlock.px += dist; currBlock.py = currBlock.y;}
           if(prevBlock.x < currBlock.x) {currBlock.px -= dist; currBlock.py = currBlock.y;}
           if(prevBlock.y > currBlock.y) {currBlock.py += dist; currBlock.px = currBlock.x;}
@@ -225,8 +242,8 @@ $(function() {
       }
 
       // Collision check
-      let hx = Math.ceil(head.px);
-      let hy = Math.ceil(head.py);
+      var hx = Math.ceil(head.px);
+      var hy = Math.ceil(head.py);
 
       if(head.px < 0 || hx > gridWidth() || head.py < 0 || hy > gridHeight()) {
         // Lost too;
@@ -238,8 +255,8 @@ $(function() {
         lost();
       }
 
-      for(let i = 2; i < snake.body.length; i++) {
-        let block = snake.body[i];
+      for(var i = 2; i < snake.body.length; i++) {
+        var block = snake.body[i];
         //console.log(hx, hy, block.x, block.y);
         if(hx == block.x && hy == block.y) {
           // LOST!!!
@@ -273,7 +290,7 @@ $(function() {
 
   function nextChunk() {
     if(data.length < 1) {
-      data = "northychen@gmail.com-".split('');
+      data = (EMAIL + "-").split('');
     }
     return data.shift();
   }
@@ -345,7 +362,7 @@ $(function() {
   }
 
   function addFood() {
-    let c = nextChunk();
+    var c = nextChunk();
     if(c == '-') {
       won();
     }
@@ -410,7 +427,7 @@ $(function() {
       y = lastBlock.y;
     }
 
-    for(let c of chunk) {
+    for(var c of chunk) {
       var dom = $('<div class="snakeBody"></div>');
       dom.text(c);
       var block = {
