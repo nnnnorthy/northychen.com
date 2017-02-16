@@ -318,7 +318,7 @@ $(function() {
         start();
       }
     }else if(state == STATES.RUNNING) {
-      if(key == 'Escape' || key == '\u001b' || key == 'p' || key == ' ') {
+      if(key == 'Escape' || key == 'U+001B' || key == 'p' || key == ' ' || key == 'U+0020' || key == 'U+0050') {
         pause();
       }else {
         if(key.endsWith('Up'))    snake.cmd.push(DIR.UP);
