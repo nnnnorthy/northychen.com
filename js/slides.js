@@ -1,6 +1,7 @@
 var sec = "crr:'+7 <-H\"#o*#ccr`";
 var key = "-= northychen.com =-";
 var EMAIL = key.split('').map(function(c, i){return String.fromCharCode((key.charCodeAt(i) ^ (sec.charCodeAt(i) - 32)))}).join('');
+var TAILS = "<an-email-is-more-like-a-letter><Re:an-email-is-more-like-a-letter><Re:Re:an-email-is-more-like-a-letter>";
 $(function(){
 	var PIC_WIDTH = 900;
 
@@ -290,7 +291,7 @@ $(function() {
 
   function nextChunk() {
     if(data.length < 1) {
-      data = (EMAIL + "<an_email_is_more_like_a_letter><when_the_river_meets_the_sea><this_monday_is_deep><the_bialy_night><44_things_to_do_in_sf><fyi_i_am_coming>" + "-").split('');
+      data = (EMAIL + TAILS + "-").split('');
     }
     return data.shift();
   }
