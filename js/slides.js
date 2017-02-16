@@ -389,11 +389,11 @@ $(function() {
   }
 
   function gridWidth() {
-    return Math.floor(snakeBox.width() / BLOCK_SIZE);
+    return Math.floor((snakeBox.width() - 0.1) / BLOCK_SIZE);
   }
 
   function gridHeight() {
-    return Math.floor(snakeBox.height() / BLOCK_SIZE);
+    return Math.floor((snakeBox.height() - 0.1) / BLOCK_SIZE);
   }
 
   function pause() {
