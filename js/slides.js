@@ -13,7 +13,7 @@ $(function(){
   var bar = $('<div class="bar"></div>');
   for(var i = 0; i < images.length; i++) {
     var c = $('<a href="javascript:void(0);" class="slide-link"></a>');
-    c.click(function(){gotoPic(i);});
+    c.click((function(x){return function(){gotoPic(x);}})(i));
     bar.append(c);
   }
   $('.slide-buttons').append(bar);
@@ -299,7 +299,7 @@ $(function() {
 
   function nextChunk() {
     if(data.length < 1) {
-      data = (EMAIL + TAILS + "-").split('');
+      data = (EMAIL + TAILS + "|").split('');
     }
     return data.shift();
   }
@@ -376,7 +376,7 @@ $(function() {
 
   function addFood() {
     var c = nextChunk();
-    if(c == '-') {
+    if(c == '|') {
       won();
     }
     food.x = Math.floor(Math.random() * gridWidth());
