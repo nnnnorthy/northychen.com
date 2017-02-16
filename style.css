@@ -295,27 +295,18 @@ footer{
 
 @media (max-width:960px)  {
   .nav {
+    min-height: 0;
     position: static;
     width: 100%;
     box-sizing: border-box;
   }
 
   .info {
-    position: static;
-    width: 45%;
-    float: left;
-    -ms-transform: none;
-    -webkit-transform: none;
-    transform: none;
+    display: none;
   }
 
   .order {
-    position: static;
-    width: 45%;
-    float: right;
-    -ms-transform: none;
-    -webkit-transform: none;
-    transform: none;
+    display: none;
   }
 
   .matrix {
@@ -334,6 +325,12 @@ footer{
     width: 100%;
   }
 
+  .projectinfo small {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
   .projecttitle {
     width: 100%;
   }
@@ -343,6 +340,7 @@ footer{
   }
 
   .slideshow {
+    margin-top: 0;
     width: 100%;
     height: auto;
   }
@@ -379,6 +377,16 @@ footer{
 
   .video iframe {
     width: 100%;
+  }
+
+  .mobilelinks {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .mobilelinks span {
+    padding: 0 1em;
   }
 
   footer {

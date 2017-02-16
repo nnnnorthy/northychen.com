@@ -70,6 +70,7 @@ $(function(){
 $(function(){
   var wechat = $("#mobilewechatlink");
   var gmail = $("#mobilegmaillink");
+  var instagram = $("#mobileinstagramlink");
 
   wechat.click(function() {
     wechat.text('nnnnorthy');
@@ -77,6 +78,10 @@ $(function(){
 
   gmail.click(function() {
     gmail.text(EMAIL);
+  });
+
+  instagram.click(function() {
+    instagram.text('nnnnorthy');
   });
 });
 
