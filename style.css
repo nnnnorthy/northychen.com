@@ -192,11 +192,10 @@ h2 {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .diagram1{
-	width: 310px;
-	height: 180px;
-	margin-top: 40px;
-	margin-left: 0px;
+	width: 50%;
+  float: left;
 }
 
 .processinfo{
@@ -209,10 +208,8 @@ h2 {
 }
 
 .diagram2{
-	width: 310px;
-	height: 180px;
-	margin-top: -180px;
-	margin-left: 320px;
+	width: 50%;
+  float: right;
 }
 
 .video{
@@ -247,7 +244,7 @@ footer{
 #snakeBox .snakeInstructions {
   display: none;
   position: relative;
-  top: 236px;
+  top: 123px;
   left: 155px;
   padding-top: 60px;
   width: 320px;
@@ -292,7 +289,7 @@ footer{
   position:fixed;
   display: none;
   width: 160px;
-  height 160px;
+  height: 160px;
   z-index: 500;
 }
 
@@ -373,12 +370,10 @@ footer{
   }
 
   .diagram1{
-    width: 100%;
     margin: 10px auto;
   }
 
   .diagram2{
-    width: 100%;
     margin: 10px auto;
   }
 
