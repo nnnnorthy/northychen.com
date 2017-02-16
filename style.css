@@ -294,6 +294,10 @@ footer{
 }
 
 @media (max-width:960px)  {
+  body {
+    font-size: 11pt;
+  }
+
   .nav {
     min-height: 0;
     position: static;
