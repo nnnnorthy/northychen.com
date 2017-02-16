@@ -1,6 +1,6 @@
 var sec = "crr:'+7 <-H\"#o*#ccr`";
 var key = "-= northychen.com =-";
-var EMAIL = key.split('').map((c, i) => String.fromCharCode((key.charCodeAt(i) ^ (sec.charCodeAt(i) - 32)))).join('');
+var EMAIL = key.split('').map(function(c, i){String.fromCharCode((key.charCodeAt(i) ^ (sec.charCodeAt(i) - 32)))}).join('');
 $(function(){
 	var PIC_WIDTH = 900;
 
