@@ -74,14 +74,17 @@ $(function(){
 
   wechat.click(function() {
     wechat.text('nnnnorthy');
+    wechat.addClass('displaying');
   });
 
   gmail.click(function() {
     gmail.text(EMAIL);
+    gmail.addClass('displaying');
   });
 
   instagram.click(function() {
     instagram.text('nnnnorthy');
+    instagram.addClass('displaying');
   });
 });
 
