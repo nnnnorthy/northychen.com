@@ -397,8 +397,8 @@ footer{
   }
 
   .mobilelinks span {
-    font-size: 0.8em;
     padding: 0 0.6em;
+    text-decoration: underline;
   }
 
   footer {
