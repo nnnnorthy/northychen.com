@@ -304,19 +304,23 @@ $(function() {
   }
 
   function keydown(keyPressed) {
-    //console.log(keyPressed);
-    console.log(keyPressed.key, state);
+    console.log(keyPressed);
+    //console.log(keyPressed.key, state);
 
     var key = keyPressed.key;
+
+    if(!key) {
+      key = keyPressed.originalEvent.keyIdentifier;
+    }
 
     if(state == STATES.LOADED) {
       if(key == 'Enter') {
         start();
       }
     }else if(state == STATES.RUNNING) {
-      if(key == 'Escape' || key == 'p' || key == ' ') {
+      if(key == 'Escape' || key == '\u001b' || key == 'p' || key == ' ') {
         pause();
-      }else if(key.startsWith('Arrow')) {
+      }else {
         if(key.endsWith('Up'))    snake.cmd.push(DIR.UP);
         if(key.endsWith('Down'))  snake.cmd.push(DIR.DOWN);
         if(key.endsWith('Left'))  snake.cmd.push(DIR.LEFT);
