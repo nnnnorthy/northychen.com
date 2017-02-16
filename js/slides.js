@@ -328,15 +328,15 @@ $(function() {
       }
 
     }else if(state == STATES.PAUSED) {
-      if(key == 'Enter' || key == ' ') {
+      if(key == 'Enter' || key == ' ' || key == 'U+0020') {
         resume();
       }
     }else if(state == STATES.LOST) {
-      if(key == 'Enter' || key == ' ') {
+      if(key == 'Enter' || key == ' ' || key == 'U+0020') {
         start();
       }
     }else if(state == STATES.WON) {
-      if(key == 'Enter' || key == ' ') {
+      if(key == 'Enter' || key == ' ' || key == 'U+0020') {
         start();
       }
     }
