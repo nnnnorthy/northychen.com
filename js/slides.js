@@ -148,7 +148,8 @@ $(function() {
     RUNNING   : 2,
     LOST      : 3,
     WON       : 4,
-    FINISHED  : 5
+    ANIMATE   : 5,
+    FINISHED  : 6
   };
 
   const DIR = {
@@ -169,7 +170,7 @@ $(function() {
 
   function update(t) {
     // END game AI logic
-    if((state == STATES.WON || state == STATES.LOST) && snake.cmd.length == 0) {
+    if(state == STATES.ANIMATE && snake.cmd.length == 0) {
       var x = snake.body[0].x;
       var y = snake.body[0].y;
       var dir = snake.dir;
@@ -326,7 +327,7 @@ $(function() {
     }
 
     // Register for next frame update
-    if(state == STATES.RUNNING || state == STATES.WON || state == STATES.LOST) {
+    if(state == STATES.RUNNING || state == STATES.ANIMATE) {
       handler = window.requestAnimationFrame(update);
     }
   }
@@ -412,7 +413,8 @@ $(function() {
     food.c = c;
     foodBox.css({
       top: food.y * BLOCK_SIZE,
-      left: food.x * BLOCK_SIZE
+      left: food.x * BLOCK_SIZE,
+      display: 'block'
     });
     foodBox.text(c);
   }
@@ -444,6 +446,11 @@ $(function() {
     setInstructions(":)<br/>NOW DROP A HELLO.");
     instructions.show();
     speed = START_SPEED * 3;
+    for(var t = 0; t < 2000; t+= 400) {
+      setTimeout(function(){$('.snakeBody').css({fontSize:'1.2em'})}, t);
+      setTimeout(function(){$('.snakeBody').css({fontSize:'1.0em'})}, t + 200);
+    }
+    scheduleAnimation(2000);
   }
 
   function won() {
@@ -451,6 +458,16 @@ $(function() {
     setInstructions(":)<br/>NOW DROP A HELLO.");
     instructions.show();
     speed = START_SPEED * 3;
+    scheduleAnimation(500);
+  }
+
+  function scheduleAnimation(t) {
+    setTimeout(function(){
+      foodBox.css({display: 'none'});
+      state = STATES.ANIMATE;
+      snake.lastUpdate = 0;
+      handler = window.requestAnimationFrame(update);
+    }, t);
   }
 
   function resume() {
