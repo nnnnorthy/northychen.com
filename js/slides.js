@@ -187,23 +187,22 @@ $(function() {
             snake.dir = DIR.DOWN;
           }
         }else if(y > endy) {
+          snake.dir = DIR.LEFT;
+        }else if(y < endy && dir != DIR.LEFT) {
           if(dir == DIR.LEFT || dir == DIR.RIGHT) {
-            snake.dir = DIR.UP;
-          }else if(dir == DIR.DOWN) {
-            snake.dir = DIR.LEFT;
-          }
-        }else if(y < endy) {
-          if(dir == DIR.LEFT || dir == DIR.RIGHT) {
+            console.log("bingo");
             snake.dir = DIR.DOWN;
           }else if(dir == DIR.UP) {
             snake.dir = DIR.LEFT;
           }
         }
-      }else if(y != endy){
-        if(dir == DIR.LEFT) {
+      }else {
+        if(y < 2) {
+          snake.dir = DIR.RIGHT;
+        }else if(x < 2){
           snake.dir = DIR.UP;
         }else {
-          snake.dir = DIR.RIGHT;
+          snake.dir = DIR.LEFT;
         }
       }
     }
