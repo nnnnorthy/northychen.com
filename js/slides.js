@@ -446,10 +446,10 @@ $(function() {
     setInstructions(":)<br/>NOW DROP A HELLO.");
     instructions.show();
     speed = START_SPEED * 3;
-    for(var t = 0; t < 2000; t+= 400) {
-      setTimeout(function(){$('.snakeBody').css({fontSize:'1.2em'})}, t);
-      setTimeout(function(){$('.snakeBody').css({fontSize:'1.0em'})}, t + 200);
-    }
+    //for(var t = 0; t < 2000; t+= 400) {
+      //setTimeout(function(){$('.snakeBody').css({fontSize:'1.2em'})}, t);
+      //setTimeout(function(){$('.snakeBody').css({fontSize:'1.0em'})}, t + 200);
+    //}
     scheduleAnimation(2000);
   }
 
