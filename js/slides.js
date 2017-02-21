@@ -147,7 +147,8 @@ $(function() {
     PAUSED    : 1,
     RUNNING   : 2,
     LOST      : 3,
-    WON       : 4
+    WON       : 4,
+    FINISHED  : 5
   };
 
   const DIR = {
@@ -167,7 +168,44 @@ $(function() {
   init();
 
   function update(t) {
-    //console.log("UPDATE", snake.cmd);
+    // END game AI logic
+    if((state == STATES.WON || state == STATES.LOST) && snake.cmd.length == 0) {
+      var x = snake.body[0].x;
+      var y = snake.body[0].y;
+      var dir = snake.dir;
+
+      if(x == 8 && y == 17 && snake.endingTurn == true) {
+        state = STATES.FINISHED;
+      }else if(x >= 28) {
+        if(y == 17) {
+          if(dir == DIR.DOWN || dir == DIR.UP) {
+            snake.dir = DIR.LEFT;
+            snake.endingTurn = true;
+          }else if(dir == DIR.RIGHT){
+            snake.dir = DIR.DOWN;
+          }
+        }else if(y > 17) {
+          if(dir == DIR.LEFT || dir == DIR.RIGHT) {
+            snake.dir = DIR.UP;
+          }else if(dir == DIR.DOWN) {
+            snake.dir = DIR.LEFT;
+          }
+        }else if(y < 17) {
+          if(dir == DIR.LEFT || dir == DIR.RIGHT) {
+            snake.dir = DIR.DOWN;
+          }else if(dir == DIR.UP) {
+            snake.dir = DIR.LEFT;
+          }
+        }
+      }else if(y != 17){
+        if(dir == DIR.LEFT) {
+          snake.dir = DIR.UP;
+        }else {
+          snake.dir = DIR.RIGHT;
+        }
+      }
+    }
+
     var dx = 0, dy = 0;
     if(snake.lastUpdate == 0) snake.lastUpdate = t;
     var moveDist = (t - snake.lastUpdate) * speed;
@@ -227,7 +265,6 @@ $(function() {
         // Update the snake direction
         while(snake.cmd.length > 0) {
           var cmd = snake.cmd.shift();
-          console.log(snake.cmd, cmd, 'SHIFT');
           // Command and current direction is in opposite direction is ignored
           if(cmd + snake.dir != 0) {
             snake.dir = cmd;
@@ -250,36 +287,32 @@ $(function() {
         dist = 0;
       }
 
-      // Collision check
-      var hx = Math.ceil(head.px);
-      var hy = Math.ceil(head.py);
+      if(state == STATES.RUNNING) {
+        // Collision check
+        var hx = Math.ceil(head.px);
+        var hy = Math.ceil(head.py);
 
-      if(head.px < 0 || hx > gridWidth() || head.py < 0 || hy > gridHeight()) {
-        // Lost too;
-        console.log("lost to wall",  head.px, head.py, hx, hy, gridWidth(), gridHeight());
-        if(head.px < 0) head.px = 0;
-        if(head.py < 0) head.py = 0;
-        if(hx > gridWidth()) head.px = gridWidth();
-        if(hy > gridHeight()) head.py = gridHeight();
-        lost();
-      }
-
-      for(var i = 2; i < snake.body.length; i++) {
-        var block = snake.body[i];
-        //console.log(hx, hy, block.x, block.y);
-        if(hx == block.x && hy == block.y) {
-          // LOST!!!
-          console.log("lost here");
+        if(head.px < 0 || hx > gridWidth() || head.py < 0 || hy > gridHeight()) {
+          // Lost too;
+          if(head.px < 0) head.px = 0;
+          if(head.py < 0) head.py = 0;
+          if(hx > gridWidth()) head.px = gridWidth();
+          if(hy > gridHeight()) head.py = gridHeight();
           lost();
         }
-      }
 
-      // Food check
-      console.log(hx, hy, food.x, food.y);
-      if(hx == food.x && hy == food.y) {
-        console.log('ATE FOOD');
-        snakeGrow(food.c);
-        addFood();
+        for(var i = 2; i < snake.body.length; i++) {
+          var block = snake.body[i];
+          if(hx == block.x && hy == block.y) {
+            lost();
+          }
+        }
+
+        // Food check
+        if(hx == food.x && hy == food.y) {
+          snakeGrow(food.c);
+          addFood();
+        }
       }
     }
 
@@ -292,7 +325,7 @@ $(function() {
     }
 
     // Register for next frame update
-    if(state == STATES.RUNNING || state == STATES.WON) {
+    if(state == STATES.RUNNING || state == STATES.WON || state == STATES.LOST) {
       handler = window.requestAnimationFrame(update);
     }
   }
@@ -305,7 +338,7 @@ $(function() {
   }
 
   function instructionsClosed() {
-    if(state == STATES.LOADED || state == STATES.LOST || state == STATES.WON) {
+    if(state == STATES.LOADED || state == STATES.LOST || state == STATES.WON || state == STATES.FINISHED) {
       start();
     }else if(state == STATES.PAUSED) {
       resume();
@@ -313,8 +346,6 @@ $(function() {
   }
 
   function keydown(keyPressed) {
-    console.log(keyPressed);
-    //console.log(keyPressed.key, state);
 
     var key = keyPressed.key;
 
@@ -340,11 +371,7 @@ $(function() {
       if(key == 'Enter' || key == ' ' || key == 'U+0020') {
         resume();
       }
-    }else if(state == STATES.LOST) {
-      if(key == 'Enter' || key == ' ' || key == 'U+0020') {
-        start();
-      }
-    }else if(state == STATES.WON) {
+    }else if(state == STATES.FINISHED) {
       if(key == 'Enter' || key == ' ' || key == 'U+0020') {
         start();
       }
@@ -354,7 +381,6 @@ $(function() {
   function init() {
     setInstructions("IT'S A KEYBOARD GAME.<br/>PRESS enter TO START CONNECTING.");
     instructions.show();
-    snake = [];
     state = STATES.LOADED;
     $(window).keydown(keydown);
     instructionClose.click(instructionsClosed);
@@ -367,6 +393,7 @@ $(function() {
     snake = {
       dir: DIR.RIGHT,
       lastUpdate: 0,
+      endingTurn: false,
       cmd: [],
       body: []
     }
@@ -415,12 +442,14 @@ $(function() {
     state = STATES.LOST;
     setInstructions(":)<br/>NOW DROP A HELLO.");
     instructions.show();
+    speed = START_SPEED * 3;
   }
 
   function won() {
     state = STATES.WON;
     setInstructions(":)<br/>NOW DROP A HELLO.");
     instructions.show();
+    speed = START_SPEED * 3;
   }
 
   function resume() {
