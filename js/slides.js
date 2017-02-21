@@ -174,30 +174,31 @@ $(function() {
       var y = snake.body[0].y;
       var dir = snake.dir;
 
-      if(x == 8 && y == 17 && snake.endingTurn == true) {
+      var endx = 8, endy = 18, endRow = 30;
+      if(x == endx && y == endy && snake.endingTurn == true) {
         state = STATES.FINISHED;
-      }else if(x >= 28) {
-        if(y == 17) {
+      }else if(x >= endRow) {
+        if(y == endy) {
           if(dir == DIR.DOWN || dir == DIR.UP) {
             snake.dir = DIR.LEFT;
             snake.endingTurn = true;
           }else if(dir == DIR.RIGHT){
             snake.dir = DIR.DOWN;
           }
-        }else if(y > 17) {
+        }else if(y > endy) {
           if(dir == DIR.LEFT || dir == DIR.RIGHT) {
             snake.dir = DIR.UP;
           }else if(dir == DIR.DOWN) {
             snake.dir = DIR.LEFT;
           }
-        }else if(y < 17) {
+        }else if(y < endy) {
           if(dir == DIR.LEFT || dir == DIR.RIGHT) {
             snake.dir = DIR.DOWN;
           }else if(dir == DIR.UP) {
             snake.dir = DIR.LEFT;
           }
         }
-      }else if(y != 17){
+      }else if(y != endy){
         if(dir == DIR.LEFT) {
           snake.dir = DIR.UP;
         }else {
