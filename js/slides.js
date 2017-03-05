@@ -380,7 +380,7 @@ $(function() {
   }
 
   function init() {
-    setInstructions("IT'S A KEYBOARD GAME.<br/>PRESS enter TO START CONNECTING.");
+    setInstructions("USE ARROW KEYS TO CONNECT LETTERS.<br/>PRESS enter TO START.");
     instructions.show();
     state = STATES.LOADED;
     $(window).keydown(keydown);
