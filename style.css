@@ -19,6 +19,7 @@ h2 {
 .nav{
 	min-height: 10px;
 	position: fixed;
+  font-weight: bold;
 	width: 1000px;
 	left: 0;
 	right: 0;
@@ -333,7 +334,7 @@ footer{
   .projectinfo small {
     display: block;
     width: 100%;
-    text-align: center;
+    text-align: justify;
   }
 
   .projecttitle {
